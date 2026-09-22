@@ -4,11 +4,14 @@
     <!-- Assignment #1: HTML & CSS Basics | Team: Vertex | Author: Ersaiyn Taiteliev -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aroma Blend Coffee - Portfolio</title>
+    <title>Aroma Blend Coffee - Portfolio Gallery</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header id="main-header">
+        <a href="index.html" class="logo">
+            <span>☕ Aroma Blend</span>
+        </a>
         <nav class="nav-menu">
             <a href="index.html">Home</a>
             <a href="about.html">About Us</a>
@@ -22,23 +25,84 @@
     </header>
 
     <main>
-        <h1>Our Signature Products</h1>
-        <p>Explore our craft coffee roasts and freshly baked pastries.</p>
+        <h1>Our Coffee & Craft Gallery</h1>
+        <p>Hover over any image to discover our signature products and coffee moments.</p>
 
-        <section class="portfolio-grid">
-            <article class="card">
-                <img src="img/coffee-beans.jpg" alt="Specialty Coffee Beans" class="project-img">
-                <h2>Ethiopian Single Origin Espresso</h2>
-                <p>Rich aroma with floral notes, jasmine aroma, and subtle citrus acidity.</p>
-                <a href="#" class="btn">Order Beans</a>
-            </article>
+        <!-- 9 Images CSS Grid (3x3) with Hover Overlay -->
+        <section class="gallery-grid">
+            
+            <div class="gallery-item">
+                <img src="img/gallery-1.jpg" alt="Ethiopian Roast">
+                <div class="gallery-overlay">
+                    <h4>Ethiopian Roast</h4>
+                    <p>Light citrus & floral notes</p>
+                </div>
+            </div>
 
-            <article class="card">
-                <img src="img/croissant.jpg" alt="Artisan Croissants" class="project-img">
-                <h2>Artisan Croissants & Bakery</h2>
-                <p>Freshly baked daily using butter and traditional French techniques.</p>
-                <a href="#" class="btn">View Bakery</a>
-            </article>
+            <div class="gallery-item">
+                <img src="img/gallery-2.jpg" alt="Artisan Croissant">
+                <div class="gallery-overlay">
+                    <h4>Artisan Croissant</h4>
+                    <p>Freshly baked French pastry</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/gallery-3.jpg" alt="Espresso Extraction">
+                <div class="gallery-overlay">
+                    <h4>Espresso Extraction</h4>
+                    <p>Double shot with thick crema</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/gallery-4.jpg" alt="Roasting Session">
+                <div class="gallery-overlay">
+                    <h4>Roasting Craft</h4>
+                    <p>Small-batch artisan roast</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/gallery-5.jpg" alt="Sweet Pastries">
+                <div class="gallery-overlay">
+                    <h4>Cinnabon Rolls</h4>
+                    <p>Cinnamon & cream cheese</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/gallery-6.jpg" alt="Barista Skills">
+                <div class="gallery-overlay">
+                    <h4>Latte Art</h4>
+                    <p>Handcrafted tulip & swan art</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/gallery-7.jpg" alt="Colombian Beans">
+                <div class="gallery-overlay">
+                    <h4>Colombian Beans</h4>
+                    <p>Milk chocolate & nutty finish</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/gallery-8.jpg" alt="Morning Breakfast">
+                <div class="gallery-overlay">
+                    <h4>Morning Combo</h4>
+                    <p>Flat White with Almond Toast</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/gallery-9.jpg" alt="Fresh Bakery">
+                <div class="gallery-overlay">
+                    <h4>Fresh Kitchen</h4>
+                    <p>Daily artisanal bakery production</p>
+                </div>
+            </div>
+
         </section>
     </main>
 
