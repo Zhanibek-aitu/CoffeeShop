@@ -5,28 +5,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aroma Blend Coffee - Portfolio Gallery</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header id="main-header">
-        <a href="index.html" class="logo">
-            <span>☕ Aroma Blend</span>
-        </a>
-        <nav class="nav-menu">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="services.html">Services</a>
-            <a href="pricing.html">Menu & Pricing</a>
-            <a href="portfolio.html">Portfolio</a>
-            <a href="careers.html">Careers</a>
-            <a href="blog.html">Blog</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3d2314;">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold text-warning" href="index.html">
+                ☕ Aroma Blend
+            </a>
+
+            <!-- Hamburger Toggler Button (Mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav gap-2">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pricing.html">Menu & Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="portfolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <main>
         <h1>Our Coffee & Craft Gallery</h1>
         <p>Hover over any image to discover our signature products and coffee moments.</p>
+
+        <!-- TASK 7: Bootstrap Carousel (9 Images with Indicators & Controls) -->
+        <section class="container my-5">
+            <h2 class="text-center mb-4" style="color: #3d2314;">Featured Highlights (Interactive Slider)</h2>
+            
+            <div id="coffeeCarousel" class="carousel slide shadow rounded overflow-hidden" data-bs-ride="carousel">
+                
+                <!-- 1. Индикаторы (черточки внизу слайдера для всех 9 слайдов) -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                    <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                    <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                    <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="7" aria-label="Slide 8"></button>
+                    <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="8" aria-label="Slide 9"></button>
+                </div>
+
+                <!-- 2. Сами 9 слайдов с картинками и подписями -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="3500">
+                        <img src="img/gallery-1.jpg" class="d-block w-100" style="height: 420px; object-fit: cover;" alt="Double Espresso">
+                        <div class="carousel-caption d-none d-md-block p-3 rounded" style="background: rgba(61, 35, 20, 0.75);">
+                            <h5>1. Double Espresso Extraction</h5>
+                            <p>Hand-pulled rich hazelnut crema from single-origin beans.</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item" data-bs-interval="3500">
+                        <img src="img/gallery-2.jpg" class="d-block w-100" style="height: 420px; object-fit: cover;" alt="Artisan Latte Art">
+                        <div class="carousel-caption d-none d-md-block p-3 rounded" style="background: rgba(61, 35, 20, 0.75);">
+                            <h5>2. Silky Latte Art</h5>
+                            <p>Steamed whole milk microfoam poured by our head baristas.</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item" data-bs-interval="3500">
+                        <img src="img/gallery-3.jpg" class="d-block w-100" style="height: 420px; object-fit: cover;" alt="V60 Pour-Over">
+                        <div class="carousel-caption d-none d-md-block p-3 rounded" style="background: rgba(61, 35, 20, 0.75);">
+                            <h5>3. Slow Pour-Over (V60)</h5>
+                            <p>Manual brewing unlocking subtle jasmine and citrus undertones.</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item" data-bs-interval="3500">
+                        <img src="img/gallery-4.jpg" class="d-block w-100" style="height: 420px; object-fit: cover;" alt="Artisanal Croissants">
+                        <div class="carousel-caption d-none d-md-block p-3 rounded" style="background: rgba(61, 35, 20, 0.75);">
+                            <h5>4. Fresh French Bakery</h5>
+                            <p>Traditional flaky butter croissants baked every morning at 7:00 AM.</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item" data-bs-interval="3500">
+                        <img src="img/gallery-5.jpg" class="d-block w-100" style="height: 420px; object-fit: cover;" alt="Cold Brew Coffee">
+                        <div class="carousel-caption d-none d-md-block p-3 rounded" style="background: rgba(61, 35, 20, 0.75);">
+                            <h5>5. 16-Hour Cold Brew</h5>
+                            <p>Slow cold water extraction resulting in ultra-smooth, low-acid coffee.</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item" data-bs-interval="3500">
+                        <img src="img/gallery-6.jpg" class="d-block w-100" style="height: 420px; object-fit: cover;" alt="Fresh Roasted Beans">
+                        <div class="carousel-caption d-none d-md-block p-3 rounded" style="background: rgba(61, 35, 20, 0.75);">
+                            <h5>6. Direct Trade Specialty Beans</h5>
+                            <p>Ethically sourced from high-altitude farms in Yirgacheffe & Huila.</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item" data-bs-interval="3500">
+                        <img src="img/gallery-7.jpg" class="d-block w-100" style="height: 420px; object-fit: cover;" alt="Sweet Cinnamon Pastry">
+                        <div class="carousel-caption d-none d-md-block p-3 rounded" style="background: rgba(61, 35, 20, 0.75);">
+                            <h5>7. Gourmet Cinnamon Buns</h5>
+                            <p>Warm spices infused with creamy Madagascar vanilla frosting.</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item" data-bs-interval="3500">
+                        <img src="img/gallery-8.jpg" class="d-block w-100" style="height: 420px; object-fit: cover;" alt="Chemex Brew">
+                        <div class="carousel-caption d-none d-md-block p-3 rounded" style="background: rgba(61, 35, 20, 0.75);">
+                            <h5>8. Chemex Triple-Filtered Brew</h5>
+                            <p>Crisp, tea-like aromatic profile perfect for sharing with friends.</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item" data-bs-interval="3500">
+                        <img src="img/gallery-9.jpg" class="d-block w-100" style="height: 420px; object-fit: cover;" alt="Cozy Atmosphere">
+                        <div class="carousel-caption d-none d-md-block p-3 rounded" style="background: rgba(61, 35, 20, 0.75);">
+                            <h5>9. Study & Relax Coffeehouse</h5>
+                            <p>High-speed Wi-Fi, comfortable seating, and calm campus atmosphere.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Кнопки «Влево» и «Вправо» -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#coffeeCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#coffeeCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
 
         <!-- 9 Images CSS Grid (3x3) with Hover Overlay -->
         <section class="gallery-grid">
@@ -109,5 +228,6 @@
     <footer>
         <p>Created by: Zhanibek Abilkhan, Madiyar Kosaman, Ersaiyn Taiteliyev, Yersin Sarsengali</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -5,24 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aroma Blend Coffee - Menu & Pricing</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header id="main-header">
-        <a href="index.html" class="logo">
-            <span>☕ Aroma Blend</span>
-        </a>
-        <nav class="nav-menu">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="services.html">Services</a>
-            <a href="pricing.html">Menu & Pricing</a>
-            <a href="portfolio.html">Portfolio</a>
-            <a href="careers.html">Careers</a>
-            <a href="blog.html">Blog</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3d2314;">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold text-warning" href="index.html">
+                ☕ Aroma Blend
+            </a>
+
+            <!-- Hamburger Toggler Button (Mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav gap-2">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="pricing.html">Menu & Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <main>
         <h1>Menu & Pricing</h1>
@@ -64,5 +77,6 @@
     <footer>
         <p>Created by: Zhanibek Abilkhan, Madiyar Kosaman, Ersaiyn Taiteliyev, Yersin Sarsengali</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
