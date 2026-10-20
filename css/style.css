@@ -476,3 +476,37 @@ footer {
 .input-group-text {
     background-color: #f7f1e5 !important;
 }
+
+/* ===================================================
+   ASSIGNMENT 4: JAVASCRIPT UI STYLES
+   =================================================== */
+
+/* Task 3: Modal Popup Overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050; /* Higher than Bootstrap navbar */
+}
+
+.popup-content {
+    background: #ffffff;
+    width: 90%;
+    max-width: 450px;
+    border-radius: 12px;
+}
+
+/* Task 2: Accordion Active State */
+.faq-question:focus {
+    box-shadow: none;
+}
+.faq-question.active .faq-icon {
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+}

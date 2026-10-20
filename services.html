@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Assignment #1: HTML & CSS Basics | Team: Vertex | Author: Madiyar Kosaman -->
+    <!-- HTML & CSS Basics | Team: Vertex | Author: Madiyar Kosaman -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aroma Blend Coffee - Services</title>
@@ -36,6 +36,44 @@
             </div>
         </div>
     </nav>
+
+    <!-- TASK 2: Interactive FAQ Accordion -->
+    <section class="container my-5">
+        <h2 class="text-center fw-bold mb-4" style="color: #3d2314;">Frequently Asked Questions (FAQ)</h2>
+        <div class="faq-container mx-auto" style="max-width: 750px;">
+            
+            <div class="faq-item mb-3 border rounded shadow-sm bg-white">
+                <button class="faq-question w-100 text-start p-3 fw-bold btn d-flex justify-content-between align-items-center">
+                    <span>☕ What kind of coffee beans do you use?</span>
+                    <span class="faq-icon fs-5">+</span>
+                </button>
+                <div class="faq-answer p-3 text-muted border-top" style="display: none;">
+                    We exclusively use 100% Specialty grade Arabica beans sourced directly from fair-trade farms in Ethiopia and Colombia.
+                </div>
+            </div>
+
+            <div class="faq-item mb-3 border rounded shadow-sm bg-white">
+                <button class="faq-question w-100 text-start p-3 fw-bold btn d-flex justify-content-between align-items-center">
+                    <span>💻 Can students study and work with laptops here?</span>
+                    <span class="faq-icon fs-5">+</span>
+                </button>
+                <div class="faq-answer p-3 text-muted border-top" style="display: none;">
+                    Yes! Every table has dedicated European power outlets, high-speed campus Wi-Fi, and a calm, quiet atmosphere.
+                </div>
+            </div>
+
+            <div class="faq-item mb-3 border rounded shadow-sm bg-white">
+                <button class="faq-question w-100 text-start p-3 fw-bold btn d-flex justify-content-between align-items-center">
+                    <span>🥐 Are your bakery items fresh?</span>
+                    <span class="faq-icon fs-5">+</span>
+                </button>
+                <div class="faq-answer p-3 text-muted border-top" style="display: none;">
+                    All croissants, cinnabons, and desserts are freshly baked every morning from scratch at 7:00 AM using genuine New Zealand butter.
+                </div>
+            </div>
+
+        </div>
+    </section>
 
     <main>
         <h1>Our Services</h1>
@@ -83,5 +121,6 @@
         <p>Created by: Zhanibek Abilkhan, Madiyar Kosaman, Ersaiyn Taiteliyev, Yersin Sarsengali4</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

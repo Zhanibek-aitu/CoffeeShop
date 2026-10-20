@@ -39,81 +39,48 @@
 
     <main class="container my-5">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-10 col-lg-8">
+            <div class="col-12 col-md-8 col-lg-6">
                 
+                <!-- TASK 1: Account Registration with JS Validation -->
                 <div class="card p-4 p-md-5 shadow-sm border-0 bg-white rounded-3">
-                    <h1 class="text-center fw-bold mb-2" style="color: #3d2314;">Reserve a Table & Contact Us</h1>
-                    <p class="text-center text-muted mb-4">Book your study spot or send a message to Aroma Blend baristas.</p>
+                    <h2 class="text-center fw-bold mb-2" style="color: #3d2314;">Customer Club Registration</h2>
+                    <p class="text-center text-muted mb-4 small">Create an account to book VIP study rooms and earn coffee cashback.</p>
 
-                    <!-- TASK 9: Bootstrap Responsive Form -->
-                    <form class="row g-3">
-                        <div class="col-12 col-md-6">
-                            <label for="fullName" class="form-label fw-bold">Full Name</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light">👤</span>
-                                <input type="text" class="form-control" id="fullName" placeholder="Zhanibek Abilkhan" required>
-                            </div>
+                    <form id="validationForm" novalidate>
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label for="valName" class="form-label fw-bold">Full Name *</label>
+                            <input type="text" class="form-control" id="valName" placeholder="Zhanibek Abilkhan">
+                            <div class="error-msg text-danger small mt-1" id="nameError"></div>
                         </div>
 
-                        <div class="col-12 col-md-6">
-                            <label for="userEmail" class="form-label fw-bold">Email Address</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light">@</span>
-                                <input type="email" class="form-control" id="userEmail" placeholder="name@astanait.edu.kz" required>
-                            </div>
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="valEmail" class="form-label fw-bold">Email Address *</label>
+                            <input type="email" class="form-control" id="valEmail" placeholder="student@astanait.edu.kz">
+                            <div class="error-msg text-danger small mt-1" id="emailError"></div>
                         </div>
 
-                        <div class="col-12 col-md-6">
-                            <label for="tablePref" class="form-label fw-bold">Seating Preference</label>
-                            <select class="form-select" id="tablePref">
-                                <option selected>Quiet Window Corner (Near Sockets)</option>
-                                <option value="1">Barista Counter</option>
-                                <option value="2">Main Hall Study Table</option>
-                                <option value="3">Outdoor Summer Terrace</option>
-                            </select>
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="valPassword" class="form-label fw-bold">Password * (Min 6 characters)</label>
+                            <input type="password" class="form-control" id="valPassword" placeholder="••••••••">
+                            <div class="error-msg text-danger small mt-1" id="passError"></div>
                         </div>
 
-                        <div class="col-12 col-md-6">
-                            <label for="visitTime" class="form-label fw-bold">Time of Visit</label>
-                            <input type="time" class="form-control" id="visitTime">
+                        <!-- Confirm Password -->
+                        <div class="mb-3">
+                            <label for="valConfirmPass" class="form-label fw-bold">Confirm Password *</label>
+                            <input type="password" class="form-control" id="valConfirmPass" placeholder="••••••••">
+                            <div class="error-msg text-danger small mt-1" id="confirmPassError"></div>
                         </div>
 
-                        <div class="col-12 my-3">
-                            <label class="form-label fw-bold d-block">Coffee Preference:</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="coffeeType" id="espressoOption" value="espresso" checked>
-                                <label class="form-check-label" for="espressoOption">Espresso / Americano</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="coffeeType" id="milkOption" value="milk">
-                                <label class="form-check-label" for="milkOption">Latte / Cappuccino</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="coffeeType" id="filterOption" value="filter">
-                                <label class="form-check-label" for="filterOption">V60 Pour-Over</label>
-                            </div>
+                        <button type="submit" class="btn btn-warning w-100 fw-bold py-2 shadow-sm">
+                            Register Account
+                        </button>
+                        <div id="formSuccessAlert" class="alert alert-success mt-3 py-2 text-center" style="display: none;">
+                            ✅ Registration successful! Welcome to Aroma Blend!
                         </div>
-
-                        <div class="col-12">
-                            <label for="userMessage" class="form-label fw-bold">Special Requests</label>
-                            <textarea class="form-control" id="userMessage" rows="3" placeholder="Need extra power extension, oat milk preference, etc."></textarea>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="termsCheck" required>
-                                <label class="form-check-label text-muted" for="termsCheck">
-                                    I confirm my reservation at AITU campus coffeehouse.
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="col-12 mt-4 text-center">
-                            <button type="submit" class="btn btn-warning btn-lg px-5 fw-bold shadow-sm">
-                                Confirm Reservation
-                            </button>
-                        </div>
-
                     </form>
                 </div>
 
@@ -122,8 +89,9 @@
     </main>
 
     <footer>
-        <p>Created by: Zhanibek Abilkhan, Madiyar Kosaman, Ersaiyn Taiteliyev, Yersin Sarsengali</p>
+        <p class="">Created by: Zhanibek Abilkhan, Madiyar Kosaman, Ersaiyn Taiteliyev, Yersin Sarsengali</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

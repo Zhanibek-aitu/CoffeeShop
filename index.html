@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Assignment #1: HTML & CSS Basics | Team: Vertex | Author: Zhanibek Abilkhan -->
+    <!-- HTML & CSS Basics | Team: Vertex | Author: Zhanibek Abilkhan -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aroma Blend Coffee - Home</title>
@@ -36,7 +36,22 @@
             </div>
         </div>
     </nav>
+    <!-- TOP BAR: Live Date/Time & Color Switcher -->
+    <div class="container-fluid py-2 border-bottom bg-light">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <!-- Task 5: Date and Time Display -->
+            <div id="currentDateTime" class="fw-bold text-muted small">
+                🕒 Loading date and time...
+            </div>
 
+            <!-- Task 4: Change Background Color Button -->
+            <div>
+                <button id="themeColorBtn" class="btn btn-sm btn-outline-dark fw-bold">
+                    🎨 Switch Theme Color
+                </button>
+            </div>
+        </div>
+    </div>
     <main>
         <!-- HERO BANNER -->
         <section class="card" style="text-align: center; padding: 40px 20px;">
@@ -46,7 +61,7 @@
             </p>
             <div>
                 <a href="pricing.html" class="btn">Explore Menu & Pricing</a>
-                <a href="about.html" class="btn" style="background-color: #8c5a3c; margin-left: 10px;">Meet Our Team</a>
+                <a href="about.html" class="btn" style="background-color: #8C5A3C; margin-left: 10px;">Meet Our Team</a>
             </div>
         </section>
 
@@ -206,9 +221,39 @@
         </section>
     </main>
 
+    <!-- Trigger Button for Popup -->
+    <div class="text-center my-4">
+        <button id="openPopupBtn" class="btn btn-warning btn-lg fw-bold px-4 shadow">
+            🎁 Get 10% Discount Coupon
+        </button>
+    </div>
+
+    <!-- TASK 3: Popup Modal Window -->
+    <div id="subscriptionPopup" class="popup-overlay" style="display: none;">
+        <div class="popup-content card p-4 shadow-lg border-0">
+            <button id="closePopupBtn" class="btn-close ms-auto mb-2" aria-label="Close"></button>
+            <h3 class="fw-bold text-center" style="color: #3d2314;">Join Aroma Club!</h3>
+            <p class="text-muted text-center small">Subscribe to receive exclusive roast drops, promo codes, and free coffee coupons.</p>
+            
+            <form id="popupForm">
+                <div class="mb-3">
+                    <input type="text" id="popupName" class="form-control" placeholder="Enter your name" required>
+                </div>
+                <div class="mb-3">
+                    <input type="email" id="popupEmail" class="form-control" placeholder="Enter your student email" required>
+                </div>
+                <button type="submit" class="btn btn-warning w-100 fw-bold">Claim Discount</button>
+            </form>
+            <div id="popupSuccess" class="alert alert-success mt-3 py-2 text-center" style="display: none;">
+                🎉 Thank you! Check your inbox for the coupon code!
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>Created by: Zhanibek Abilkhan, Madiyar Kosaman, Ersaiyn Taiteliyev, Yersin Sarsengali</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
