@@ -36,18 +36,22 @@
             </div>
         </div>
     </nav>
-    <!-- TOP BAR: Live Date/Time & Color Switcher -->
-    <div class="container-fluid py-2 border-bottom bg-light">
+    <!-- TOP BAR: Live Date/Time, Greeting & Day/Night Switcher -->
+    <div class="container-fluid py-2 border-bottom bg-light" id="topInfoBar">
         <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
-            <!-- Task 5: Date and Time Display -->
-            <div id="currentDateTime" class="fw-bold text-muted small">
-                🕒 Loading date and time...
+            <div>
+                <span id="timeGreeting" class="fw-bold me-2" style="color: #8c5a3c;"></span>
+                <span id="currentDateTime" class="fw-bold text-muted small">🕒 Loading...</span>
             </div>
 
-            <!-- Task 4: Change Background Color Button -->
-            <div>
-                <button id="themeColorBtn" class="btn btn-sm btn-outline-dark fw-bold">
-                    🎨 Switch Theme Color
+            <div class="d-flex gap-2">
+                <!-- Day / Night Theme Button -->
+                <button id="darkModeBtn" class="btn btn-sm btn-dark fw-bold">
+                    🌙 Dark Mode
+                </button>
+                <!-- Random Color Button -->
+                <button id="themeColorBtn" class="btn btn-sm btn-outline-secondary fw-bold">
+                    🎨 Tint
                 </button>
             </div>
         </div>
@@ -221,6 +225,71 @@
         </section>
     </main>
 
+    <!-- ============================================================== -->
+        <!-- ASSIGNMENT 5: Dynamic Product Filter (Switch + Objects + HOF)  -->
+        <!-- ============================================================== -->
+        <section class="container my-5">
+            <h2 class="text-center fw-bold mb-2">Interactive Coffee Catalog</h2>
+            <p class="text-center text-muted mb-4">Filter our menu dynamically (Powered by JS Objects, Switch & Higher-Order Functions)</p>
+
+            <!-- Filter Buttons -->
+            <div class="text-center mb-4">
+                <div class="btn-group shadow-sm" role="group" aria-label="Menu Category Filter">
+                    <button type="button" class="btn btn-warning fw-bold filter-btn" data-category="all">All Items</button>
+                    <button type="button" class="btn btn-outline-warning text-dark fw-bold filter-btn" data-category="espresso">Espresso Bar</button>
+                    <button type="button" class="btn btn-outline-warning text-dark fw-bold filter-btn" data-category="milk">Milk Drinks</button>
+                    <button type="button" class="btn btn-outline-warning text-dark fw-bold filter-btn" data-category="bakery">Fresh Bakery</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Container rendered by JS -->
+            <div id="dynamicCatalogGrid" class="row g-4"></div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- ASSIGNMENT 5: 5-Star Rating, Read More & Random Fact           -->
+        <!-- ============================================================== -->
+        <section class="container my-5">
+            <div class="row g-4">
+                
+                <!-- Left Column: 5-Star Rating with Sound & Animation -->
+                <div class="col-12 col-md-6">
+                    <div class="card p-4 text-center h-100 shadow-sm border-0">
+                        <h3 class="fw-bold">Rate Your Coffee Experience</h3>
+                        <p class="text-muted small">Click a star to rate us (Triggers JS DOM Styling, Animation & Sound)</p>
+                        
+                        <div class="star-rating my-2 justify-content-center" id="starContainer">
+                            <span class="star-item" data-value="1">★</span>
+                            <span class="star-item" data-value="2">★</span>
+                            <span class="star-item" data-value="3">★</span>
+                            <span class="star-item" data-value="4">★</span>
+                            <span class="star-item" data-value="5">★</span>
+                        </div>
+                        <p id="ratingFeedback" class="fw-bold mt-2 mb-0" style="color: #8c5a3c;">No rating selected yet</p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Read More Toggle & Coffee Fact -->
+                <div class="col-12 col-md-6">
+                    <div class="card p-4 h-100 shadow-sm border-0">
+                        <h3 class="fw-bold">Our Roasting Secret</h3>
+                        <p class="text-muted mb-2">
+                            We roast our specialty beans using hot-air convection technology to preserve delicate floral notes.
+                        </p>
+                        <!-- Hidden content toggled by Read More -->
+                        <p id="moreStoryText" class="text-muted" style="display: none;">
+                            Unlike traditional drum roasters that can scorch the outer bean surface, air-roasting caramelizes natural sugars evenly at 205°C. Every batch is cupped by certified Q-graders before serving at AITU!
+                        </p>
+                        <div class="mt-auto pt-2 d-flex gap-2">
+                            <button id="readMoreBtn" class="btn btn-outline-dark btn-sm fw-bold">Read More</button>
+                            <button id="playSoundBtn" class="btn btn-warning btn-sm fw-bold">🔔 Ring Barista Bell</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     <!-- Trigger Button for Popup -->
     <div class="text-center my-4">
         <button id="openPopupBtn" class="btn btn-warning btn-lg fw-bold px-4 shadow">
@@ -235,14 +304,18 @@
             <h3 class="fw-bold text-center" style="color: #3d2314;">Join Aroma Club!</h3>
             <p class="text-muted text-center small">Subscribe to receive exclusive roast drops, promo codes, and free coffee coupons.</p>
             
-            <form id="popupForm">
-                <div class="mb-3">
-                    <input type="text" id="popupName" class="form-control" placeholder="Enter your name" required>
-                </div>
-                <div class="mb-3">
-                    <input type="email" id="popupEmail" class="form-control" placeholder="Enter your student email" required>
-                </div>
-                <button type="submit" class="btn btn-warning w-100 fw-bold">Claim Discount</button>
+            <form id="popupForm" novalidate>
+            <!-- Name Input -->
+            <div class="mb-3">
+                <input type="text" id="popupName" class="form-control" placeholder="Enter your name">
+                <div id="popupNameErr" class="text-danger small mt-1"></div>
+            </div>
+            <!-- Email Input -->
+            <div class="mb-3">
+                <input type="email" id="popupEmail" class="form-control" placeholder="Enter your student email">
+                <div id="popupEmailErr" class="text-danger small mt-1"></div>
+            </div>
+            <button type="submit" class="btn btn-warning w-100 fw-bold">Claim Discount</button>
             </form>
             <div id="popupSuccess" class="alert alert-success mt-3 py-2 text-center" style="display: none;">
                 🎉 Thank you! Check your inbox for the coupon code!
