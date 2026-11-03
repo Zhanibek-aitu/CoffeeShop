@@ -532,7 +532,8 @@ footer {
    =================================================== */
 
 /* 1. Day / Night Theme (Dark Mode) */
-body.dark-mode {
+body.dark-mode,
+body.dark-mode .grid-layout-container {
     background-color: #1a120e !important;
     color: #f3e5ab !important;
     transition: background-color 0.4s ease, color 0.4s ease;
@@ -552,6 +553,14 @@ body.dark-mode .sidebar-box {
     border-color: #4a332a !important;
 }
 
+body.dark-mode .sidebar-box a {
+    color: #f3e5ab !important;
+}
+
+body.dark-mode .sidebar-box a:hover {
+    color: #ffffff !important;
+}
+
 body.dark-mode .flex-card p,
 body.dark-mode .mq-card p {
     color: #cbb8a9 !important;
@@ -566,9 +575,27 @@ body.dark-mode .text-dark,
 body.dark-mode .form-label {
     color: #f3e5ab !important;
 }
+body.dark-mode label {
+    color: #f3e5ab !important;
+}
 
 body.dark-mode .text-muted {
     color: #cbb8a9 !important;
+}
+
+body.dark-mode .pricing-table {
+    background-color: #2c1e18 !important; 
+}
+
+body.dark-mode .pricing-table td {
+    border-color: #4a332a !important; 
+    color: #f5ebe6 !important; 
+}
+
+body.dark-mode .pricing-table th {
+    background-color: #4a332a !important;
+    color: #f3e5ab !important; 
+    border-color: #4a332a !important;
 }
 
 /* 2. Interactive 5-Star Rating */
@@ -603,4 +630,145 @@ body.dark-mode .text-muted {
 }
 .dynamic-product-card:hover {
     transform: translateY(-6px) scale(1.01);
+}
+
+/* ===================================================
+   FIX CONTRAST ISSUES (Buttons, Badges & Dark Mode Text)
+   =================================================== */
+
+.btn, 
+.filter-btn, 
+#darkModeBtn, 
+button[type="submit"] {
+    color: #ffffff !important;
+}
+
+.badge.bg-warning {
+    color: #1a120e !important;
+    font-weight: 800;
+}
+
+body.dark-mode #timeGreeting,
+body.dark-mode #ratingFeedback {
+    color: #ffc107 !important;
+}
+
+/* Smooth animation for Read More */
+#moreStoryText {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin 0.3s ease;
+    margin-bottom: 0 !important;
+}
+#moreStoryText.open {
+    max-height: 200px;
+    margin-bottom: 1rem !important;
+}
+
+/* ===================================================
+   ASSIGNMENT 6: JQUERY UX & FUNCTIONALITY STYLES
+   =================================================== */
+
+/* Task 4: Colorful Scroll Progress Bar */
+#scrollProgressBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    width: 0%;
+    background: linear-gradient(90deg, #ffc107, #d97706, #8c5a3c);
+    z-index: 9999;
+    box-shadow: 0 1px 6px rgba(255, 193, 7, 0.6);
+    transition: width 0.1s ease-out;
+}
+
+/* Task 2: Autocomplete Suggestions Dropdown */
+.search-wrapper {
+    position: relative;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+#autocompleteList {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #ffffff;
+    border: 1px solid #d7c4b7;
+    border-radius: 0 0 8px 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+.autocomplete-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0e9e1;
+    color: #3d2314;
+    text-align: left;
+}
+
+.autocomplete-item:hover {
+    background-color: #fdf3d8;
+    font-weight: bold;
+}
+
+body.dark-mode #autocompleteList {
+    background: #2c1e18;
+    border-color: #4a332a;
+}
+
+body.dark-mode .autocomplete-item {
+    color: #f3e5ab;
+    border-color: #4a332a;
+}
+
+body.dark-mode .autocomplete-item:hover {
+    background-color: #4a332a;
+}
+
+/* Task 3: Search Keyword Highlighting */
+mark.search-highlight {
+    background-color: #ffc107;
+    color: #1a120e;
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* Task 7: Floating Toast Notification */
+#jqueryToastContainer {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+}
+
+.jq-toast {
+    background-color: #3d2314;
+    color: #f3e5ab;
+    border-left: 5px solid #ffc107;
+    padding: 14px 20px;
+    border-radius: 8px;
+    margin-top: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    font-weight: 600;
+    display: none;
+}
+
+/* Task 9: Lazy Load Image Fade-in */
+.lazy-img {
+    opacity: 0.2;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.lazy-img.loaded {
+    opacity: 1;
+}
+
+body.dark-mode .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
 }

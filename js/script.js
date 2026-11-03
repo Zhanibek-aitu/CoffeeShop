@@ -57,16 +57,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const now = new Date();
 
         if (dateTimeElement) {
-            const options = {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-                hour12: true
-            };
-            dateTimeElement.textContent = "🕒 " + now.toLocaleDateString("en-US", options);
+            const datePart = now.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+            const timePart = now.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+            dateTimeElement.textContent = `📅 ${datePart} | 🕒 ${timePart}`;
         }
 
         if (greetingElement) {
@@ -98,30 +91,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ---------------------------------------------------
-    // 3. DAY / NIGHT THEME SWITCH & BACKGROUND TINT
+    // 3. DAY / NIGHT THEME SWITCH (Works across ALL pages!)
     // ---------------------------------------------------
     const darkModeBtn = document.getElementById("darkModeBtn");
+
+    if (localStorage.getItem("coffeeTheme") === "dark") {
+        document.body.classList.add("dark-mode");
+        if (darkModeBtn) darkModeBtn.textContent = "☀️ Light Mode";
+    }
 
     if (darkModeBtn) {
         darkModeBtn.addEventListener("click", function () {
             document.body.classList.toggle("dark-mode");
             const isDark = document.body.classList.contains("dark-mode");
+            
+            localStorage.setItem("coffeeTheme", isDark ? "dark" : "light");
+
             this.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-            this.className = isDark ? "btn btn-sm btn-warning fw-bold" : "btn btn-sm btn-dark fw-bold";
             playNotificationSound("click");
-        });
-    }
-
-    const themeBtn = document.getElementById("themeColorBtn");
-    const colors = ["#fcf9f2", "#f2efe9", "#e8e1d5", "#fdfbf7", "#f3ece2"];
-    let colorIndex = 0;
-
-    if (themeBtn) {
-        themeBtn.addEventListener("click", function () {
-            document.body.classList.remove("dark-mode");
-            if (darkModeBtn) darkModeBtn.textContent = "🌙 Dark Mode";
-            colorIndex = (colorIndex + 1) % colors.length;
-            document.body.style.backgroundColor = colors[colorIndex];
         });
     }
 
@@ -286,35 +273,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (readMoreBtn && moreStoryText) {
         readMoreBtn.addEventListener("click", function () {
-            const isHidden = moreStoryText.style.display === "none";
-            moreStoryText.style.display = isHidden ? "block" : "none";
-            this.textContent = isHidden ? "Read Less" : "Read More";
+            moreStoryText.classList.toggle("open");
+            const isOpen = moreStoryText.classList.contains("open");
+            this.textContent = isOpen ? "Read Less" : "Read More";
         });
     }
 
 
     // ---------------------------------------------------
-    // 6. KEYBOARD NAVIGATION FOR MENU (ArrowLeft / ArrowRight)
+    // 6. KEYBOARD NAVIGATION FOR MENU (Works immediately!)
     // ---------------------------------------------------
     const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
 
     if (navLinks.length > 0) {
         document.addEventListener("keydown", function (e) {
-            const activeEl = document.activeElement;
-            const currentIndex = Array.from(navLinks).indexOf(activeEl);
+            if (["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
 
-            if (currentIndex !== -1) {
-                if (e.key === "ArrowRight") {
-                    e.preventDefault();
+            if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+                e.preventDefault();
+                const currentIndex = Array.from(navLinks).indexOf(document.activeElement);
+
+                if (currentIndex === -1) {
+                    navLinks[0].focus();
+                } else if (e.key === "ArrowRight") {
                     const nextIndex = (currentIndex + 1) % navLinks.length;
                     navLinks[nextIndex].focus();
                 } else if (e.key === "ArrowLeft") {
-                    e.preventDefault();
                     const prevIndex = (currentIndex - 1 + navLinks.length) % navLinks.length;
                     navLinks[prevIndex].focus();
                 }
             }
-        });
+        }); 
     }
 
 
@@ -493,3 +482,249 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+/* ===================================================
+   ASSIGNMENT #6: JQUERY IMPLEMENTATION (ALL 9 TASKS)
+   Team: Vertex | Group: SE-2505
+   =================================================== */
+
+$(document).ready(function () {
+    // TASK 0: Setup & Console Check
+    console.log("jQuery is ready!");
+
+    // Inject Progress Bar (Task 4) and Toast Container (Task 7) into all pages
+    $("body").prepend('<div id="scrollProgressBar"></div>');
+    $("body").append('<div id="jqueryToastContainer"></div>');
+
+
+    // ---------------------------------------------------
+    // TASK 7: Notification System (Floating Toasts)
+    // ---------------------------------------------------
+    function showToast(message) {
+        const $toast = $(`<div class="jq-toast">${message}</div>`);
+        $("#jqueryToastContainer").append($toast);
+        $toast.fadeIn(300).delay(2500).fadeOut(400, function () {
+            $(this).remove();
+        });
+    }
+
+    // Trigger toast when clicking "Order Item" in catalog
+    $(document).on("click", ".dynamic-product-card .btn", function (e) {
+        e.preventDefault();
+        const itemName = $(this).closest(".card").find(".card-title").text();
+        showToast(`☕ "${itemName}" added to your order!`);
+    });
+
+
+    // ---------------------------------------------------
+    // TASK 4: Colorful Scroll Progress Bar
+    // ---------------------------------------------------
+    $(window).on("scroll", function () {
+        const scrollTop = $(window).scrollTop();
+        const docHeight = $(document).height() - $(window).height();
+        const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        $("#scrollProgressBar").css("width", scrollPercent + "%");
+    });
+
+
+    // ---------------------------------------------------
+    // TASK 1, 2 & 3: Live Search, Autocomplete & Highlighting
+    // ---------------------------------------------------
+    const searchSuggestions = [
+        "Double Espresso",
+        "V60 Pour-Over",
+        "Caramel Latte Art",
+        "Iced Nitro Cold Brew",
+        "Butter Croissant",
+        "Cinnamon Cream Roll",
+        "Arabica",
+        "Ethiopia",
+        "Wi-Fi"
+    ];
+
+    // Store original FAQ text for clean highlighting resets
+    $(".faq-answer, .dynamic-product-card .card-text").each(function () {
+        $(this).attr("data-original", $(this).text());
+    });
+
+    function performLiveSearch(query) {
+        const cleanQuery = query.trim().toLowerCase();
+
+        // TASK 1: Live Filter on Catalog Cards (.filter)
+        $("#dynamicCatalogGrid > div").filter(function () {
+            const cardText = $(this).text().toLowerCase();
+            $(this).toggle(cardText.indexOf(cleanQuery) > -1);
+        });
+
+        // TASK 3: Search Highlighting with Regex & .html()
+        $(".faq-answer, .dynamic-product-card .card-text").each(function () {
+            const originalText = $(this).attr("data-original") || $(this).text();
+            if (cleanQuery.length > 1) {
+                const regex = new RegExp(`(${cleanQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, "gi");
+                const highlighted = originalText.replace(regex, '<mark class="search-highlight">$1</mark>');
+                $(this).html(highlighted);
+            } else {
+                $(this).text(originalText);
+            }
+        });
+    }
+
+    $("#coffeeSearchInput").on("keyup", function () {
+        const val = $(this).val();
+        performLiveSearch(val);
+
+        // TASK 2: Autocomplete Suggestions Dropdown
+        const $list = $("#autocompleteList");
+        $list.empty();
+
+        if (val.trim().length > 0) {
+            const matches = searchSuggestions.filter(item =>
+                item.toLowerCase().includes(val.trim().toLowerCase())
+            );
+
+            if (matches.length > 0) {
+                matches.forEach(match => {
+                    $list.append(`<div class="autocomplete-item">🔍 ${match}</div>`);
+                });
+                $list.slideDown(150);
+            } else {
+                $list.slideUp(150);
+            }
+        } else {
+            $list.slideUp(150);
+        }
+    });
+
+    // Click on an autocomplete suggestion
+    $(document).on("click", ".autocomplete-item", function () {
+        const selectedText = $(this).text().replace("🔍 ", "").trim();
+        $("#coffeeSearchInput").val(selectedText);
+        $("#autocompleteList").slideUp(150);
+        performLiveSearch(selectedText);
+        showToast(`🔍 Filtered by "${selectedText}"`);
+    });
+
+    // Clear search button
+    $("#clearSearchBtn").on("click", function () {
+        $("#coffeeSearchInput").val("");
+        $("#autocompleteList").slideUp(150);
+        performLiveSearch("");
+    });
+
+
+    // ---------------------------------------------------
+    // TASK 5: Animated Number Counter
+    // ---------------------------------------------------
+    let counterAnimated = false;
+
+    function checkAndAnimateCounters() {
+        const $stats = $("#statsSection");
+        if ($stats.length === 0 || counterAnimated) return;
+
+        const windowBottom = $(window).scrollTop() + $(window).height();
+        const statsTop = $stats.offset().top;
+
+        if (windowBottom > statsTop + 50) {
+            counterAnimated = true;
+            $(".counter-num").each(function () {
+                const $this = $(this);
+                const target = parseInt($this.attr("data-target"), 10);
+
+                $({ countNum: 0 }).animate(
+                    { countNum: target },
+                    {
+                        duration: 1800,
+                        easing: "swing",
+                        step: function () {
+                            $this.text(Math.floor(this.countNum) + "+");
+                        },
+                        complete: function () {
+                            $this.text(target + "+");
+                        }
+                    }
+                );
+            });
+        }
+    }
+    $(window).on("scroll", checkAndAnimateCounters);
+    checkAndAnimateCounters();
+
+
+    // ---------------------------------------------------
+    // TASK 6: Loading Spinner on Submit (Only if Form is Valid!)
+    // ---------------------------------------------------
+    $("form").on("submit", function () {
+        const $form = $(this);
+        const $btn = $form.find('button[type="submit"]');
+
+        let hasValidationErrors = false;
+        $form.find(".text-danger, .error-msg").each(function () {
+            if ($(this).text().trim() !== "") {
+                hasValidationErrors = true;
+            }
+        });
+
+        if (hasValidationErrors) {
+            showToast("⚠️ Please fix the errors in the form!");
+            return;
+        }
+
+        if ($btn.length > 0 && !$btn.prop("disabled")) {
+            const originalText = $btn.html();
+
+            $btn.prop("disabled", true);
+            $btn.html('<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Please wait...');
+
+            setTimeout(function () {
+                $btn.prop("disabled", false);
+                $btn.html(originalText);
+                showToast("✅ Action processed by server!");
+            }, 1200);
+        }
+    });
+
+    // ---------------------------------------------------
+    // TASK 8: Copied to Clipboard Button
+    // ---------------------------------------------------
+    $("#copyPromoBtn").on("click", function () {
+        const $btn = $(this);
+        const promoText = $("#promoCodeSnippet").text().trim();
+
+        navigator.clipboard.writeText(promoText).then(function () {
+            const originalHTML = $btn.html();
+            $btn.html("✓ Copied to clipboard!").removeClass("btn-warning").addClass("btn-success");
+            showToast(`📋 Promo code "${promoText}" copied!`);
+
+            setTimeout(function () {
+                $btn.html(originalHTML).removeClass("btn-success").addClass("btn-warning");
+            }, 2200);
+        });
+    });
+
+
+    // ---------------------------------------------------
+    // TASK 9: Image Lazy Loading on Scroll
+    // ---------------------------------------------------
+    function lazyLoadImages() {
+        const windowBottom = $(window).scrollTop() + $(window).height() + 100;
+
+        $(".lazy-img").each(function () {
+            const $img = $(this);
+            const imgTop = $img.offset().top;
+
+            if (windowBottom > imgTop && !$img.hasClass("loaded")) {
+                const realSrc = $img.attr("data-src");
+                if (realSrc) {
+                    $img.attr("src", realSrc).addClass("loaded");
+                }
+            }
+        });
+    }
+    $(window).on("scroll", lazyLoadImages);
+    lazyLoadImages();
+
+    $("#valEmail, #valPassword, #valConfirmPass, #popupEmail").on("keydown input", function (e) {
+        if (e.key === " ") e.preventDefault();
+        this.value = this.value.replace(/\s+/g, "");
+    });
+    });
