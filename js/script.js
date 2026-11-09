@@ -181,12 +181,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let filteredList = [];
 
-        // Switch Statement for Category Filtering
         switch (categoryFilter) {
             case "espresso":
             case "milk":
             case "bakery":
-                // Higher-Order Function: .filter()
                 filteredList = menuItems.filter(item => item.category === categoryFilter);
                 break;
             case "all":
@@ -195,26 +193,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 break;
         }
 
-        // Higher-Order Function: .map() to build HTML cards
+        const placeholderGif = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
         const cardsHTML = filteredList.map(item => `
-            <div class="col-12 col-md-6 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-4 catalog-item-col">
                 <div class="card h-100 shadow-sm border-0 dynamic-product-card">
-                    <img src="${item.img}" class="card-img-top" alt="${item.name}" style="height: 190px; object-fit: cover;">
+                    <img data-src="${item.img}" src="${placeholderGif}" class="lazy-img card-img-top" alt="${item.name}" style="height: 190px; object-fit: cover;">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <h5 class="card-title fw-bold mb-0">${item.name}</h5>
+                                <h5 class="card-title fw-bold mb-0" data-original="${item.name}">${item.name}</h5>
                                 <span class="badge bg-warning text-dark fs-6">${item.getFormattedPrice()}</span>
                             </div>
-                            <p class="card-text text-muted small">${item.desc}</p>
+                            <p class="card-text text-muted small" data-original="${item.desc}">${item.desc}</p>
                         </div>
-                        <a href="pricing.html" class="btn btn-sm btn-outline-warning text-dark fw-bold mt-3">Order Item</a>
+                        <a href="pricing.html" class="btn btn-sm btn-outline-warning fw-bold mt-3">Order Item</a>
                     </div>
                 </div>
             </div>
         `).join("");
 
-        catalogGrid.innerHTML = cardsHTML;
+        catalogGrid.innerHTML = cardsHTML + '<p id="noSearchResults" class="text-center text-muted fw-bold my-4" style="display:none;">😕 No matching coffee or bakery items found.</p>';
+
+        if (window.triggerLazyLoad) window.triggerLazyLoad();
     }
 
     if (catalogGrid) {
@@ -496,6 +496,17 @@ $(document).ready(function () {
     $("body").prepend('<div id="scrollProgressBar"></div>');
     $("body").append('<div id="jqueryToastContainer"></div>');
 
+    if ($("#darkModeBtn").length === 0) {
+        const isDarkNow = $("body").hasClass("dark-mode");
+        const btnLabel = isDarkNow ? "☀️ Light" : "🌙 Dark";
+        $(".navbar-nav").append(`<li class="nav-item ms-lg-2"><button id="navDarkModeBtn" class="btn btn-sm btn-warning fw-bold mt-1">${btnLabel}</button></li>`);
+        $(document).on("click", "#navDarkModeBtn", function () {
+            $("body").toggleClass("dark-mode");
+            const darkState = $("body").hasClass("dark-mode");
+            localStorage.setItem("coffeeTheme", darkState ? "dark" : "light");
+            $(this).text(darkState ? "☀️ Light" : "🌙 Dark");
+        });
+    }
 
     // ---------------------------------------------------
     // TASK 7: Notification System (Floating Toasts)
@@ -528,7 +539,7 @@ $(document).ready(function () {
 
 
     // ---------------------------------------------------
-    // TASK 1, 2 & 3: Live Search, Autocomplete & Highlighting
+    // TASK 1, 2 & 3: Improved Live Search, Autocomplete & Full Highlighting
     // ---------------------------------------------------
     const searchSuggestions = [
         "Double Espresso",
@@ -537,39 +548,42 @@ $(document).ready(function () {
         "Iced Nitro Cold Brew",
         "Butter Croissant",
         "Cinnamon Cream Roll",
-        "Arabica",
-        "Ethiopia",
-        "Wi-Fi"
+        "Chocolate",
+        "Ethiopian",
+        "Vanilla"
     ];
-
-    // Store original FAQ text for clean highlighting resets
-    $(".faq-answer, .dynamic-product-card .card-text").each(function () {
-        $(this).attr("data-original", $(this).text());
-    });
 
     function performLiveSearch(query) {
         const cleanQuery = query.trim().toLowerCase();
+        let visibleCount = 0;
 
-        // TASK 1: Live Filter on Catalog Cards (.filter)
-        $("#dynamicCatalogGrid > div").filter(function () {
+        // TASK 1: Live Filter on Catalog Cards
+        $("#dynamicCatalogGrid .catalog-item-col").filter(function () {
             const cardText = $(this).text().toLowerCase();
-            $(this).toggle(cardText.indexOf(cleanQuery) > -1);
+            const isMatch = cardText.indexOf(cleanQuery) > -1;
+            $(this).toggle(isMatch);
+            if (isMatch) visibleCount++;
         });
 
-        // TASK 3: Search Highlighting with Regex & .html()
-        $(".faq-answer, .dynamic-product-card .card-text").each(function () {
-            const originalText = $(this).attr("data-original") || $(this).text();
-            if (cleanQuery.length > 1) {
-                const regex = new RegExp(`(${cleanQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, "gi");
-                const highlighted = originalText.replace(regex, '<mark class="search-highlight">$1</mark>');
-                $(this).html(highlighted);
+        $("#noSearchResults").toggle(visibleCount === 0 && cleanQuery.length > 0);
+
+        $(".dynamic-product-card .card-title, .dynamic-product-card .card-text, .faq-answer").each(function () {
+            if (!$(this).attr("data-original")) {
+                $(this).attr("data-original", $(this).text());
+            }
+            const originalText = $(this).attr("data-original");
+
+            if (cleanQuery.length > 0) {
+                const escaped = cleanQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const regex = new RegExp(`(${escaped})`, "gi");
+                $(this).html(originalText.replace(regex, '<mark class="search-highlight">$1</mark>'));
             } else {
                 $(this).text(originalText);
             }
         });
     }
 
-    $("#coffeeSearchInput").on("keyup", function () {
+    $("#coffeeSearchInput").on("keyup focus", function () {
         const val = $(this).val();
         performLiveSearch(val);
 
@@ -595,7 +609,12 @@ $(document).ready(function () {
         }
     });
 
-    // Click on an autocomplete suggestion
+    $(document).on("click", function (e) {
+        if (!$(e.target).closest(".search-wrapper").length) {
+            $("#autocompleteList").slideUp(150);
+        }
+    });
+
     $(document).on("click", ".autocomplete-item", function () {
         const selectedText = $(this).text().replace("🔍 ", "").trim();
         $("#coffeeSearchInput").val(selectedText);
@@ -604,7 +623,6 @@ $(document).ready(function () {
         showToast(`🔍 Filtered by "${selectedText}"`);
     });
 
-    // Clear search button
     $("#clearSearchBtn").on("click", function () {
         $("#coffeeSearchInput").val("");
         $("#autocompleteList").slideUp(150);
@@ -703,24 +721,26 @@ $(document).ready(function () {
 
 
     // ---------------------------------------------------
-    // TASK 9: Image Lazy Loading on Scroll
+    // TASK 9: Image Lazy Loading across ALL sections
     // ---------------------------------------------------
     function lazyLoadImages() {
-        const windowBottom = $(window).scrollTop() + $(window).height() + 100;
+        const windowBottom = $(window).scrollTop() + $(window).height() + 120;
 
         $(".lazy-img").each(function () {
             const $img = $(this);
-            const imgTop = $img.offset().top;
-
-            if (windowBottom > imgTop && !$img.hasClass("loaded")) {
-                const realSrc = $img.attr("data-src");
-                if (realSrc) {
-                    $img.attr("src", realSrc).addClass("loaded");
+            if ($img.is(":visible") && !$img.hasClass("loaded")) {
+                const imgTop = $img.offset().top;
+                if (windowBottom > imgTop) {
+                    const realSrc = $img.attr("data-src");
+                    if (realSrc) {
+                        $img.attr("src", realSrc).addClass("loaded");
+                    }
                 }
             }
         });
     }
-    $(window).on("scroll", lazyLoadImages);
+    window.triggerLazyLoad = lazyLoadImages;
+    $(window).on("scroll resize", lazyLoadImages);
     lazyLoadImages();
 
     $("#valEmail, #valPassword, #valConfirmPass, #popupEmail").on("keydown input", function (e) {

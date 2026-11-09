@@ -747,16 +747,19 @@ mark.search-highlight {
     z-index: 9999;
 }
 
+/* Task 7: High-Contrast Floating Toast Notification (Perfect Symmetric Border) */
 .jq-toast {
-    background-color: #3d2314;
-    color: #f3e5ab;
-    border-left: 5px solid #ffc107;
-    padding: 14px 20px;
+    background: linear-gradient(135deg, #1b4332, #2d6a4f) !important;
+    color: #ffffff !important;
+    border: 2px solid #ffc107 !important;
+    padding: 12px 20px;
     border-radius: 8px;
     margin-top: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
     font-weight: 600;
+    font-size: 0.95rem;
     display: none;
+    line-height: 1.4;
 }
 
 /* Task 9: Lazy Load Image Fade-in */
@@ -771,4 +774,8 @@ mark.search-highlight {
 
 body.dark-mode .btn-close {
     filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+#promoCodeSnippet {
+    border: 1px dashed #ffc107;
 }
